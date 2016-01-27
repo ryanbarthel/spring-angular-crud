@@ -12,6 +12,7 @@
 		$scope.deleteCustomer = function(customer) {
 			if (PopupService.showPopup('Really delete this?')) {
 				customer.$delete(function() {
+					$scope.customers = CustomerService.query();
 					$state.go('customers');
 				});
 			};

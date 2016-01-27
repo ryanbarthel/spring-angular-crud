@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-
-
-
 @Entity
 public class Customer {
 	
@@ -21,12 +18,15 @@ public class Customer {
 	private Integer id;
 	
 	@Column
+	private String email;
+	
+	@Column
 	private String name;
 	
 	@Column
 	private String telephone;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="addressID")
 	private Address address;
 	
@@ -70,10 +70,32 @@ public class Customer {
 		this.address = address;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Customer [id=%s, name=%s, telephone=%s, address=%s]", id, name, telephone, address);
+		StringBuilder builder = new StringBuilder();
+		builder.append("Customer [id=");
+		builder.append(id);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", telephone=");
+		builder.append(telephone);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
 	
 
 }
