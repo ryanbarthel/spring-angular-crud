@@ -33,7 +33,7 @@ public class CustomerController {
 	
 	@RequestMapping(method = RequestMethod.POST) 
 	public Customer addCustomer(@RequestBody Customer customer) {
-		System.out.println(customer);
+		LOGGER.info(customer);
 		customer.setId(null);
 		Address address = null;
 		if (customer.getAddress() != null) {
